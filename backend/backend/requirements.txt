@@ -1,0 +1,6 @@
+alembic==1.0.11
+SQLAlchemy==1.3.6
+aiofiles
+opencv-python
+email-validator
+psycopg2

@@ -1,0 +1,41 @@
+version: "3.0"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_DB=intross
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=29c550b6db624fdaa622eab5b09ae729
+      - "RUN=uvicorn app.main:app --reload --host 0.0.0.0 --port 3000"
+    command: bash -c "while true; do sleep 1; done"
+
+  db:
+    image: postgres:12
+    volumes:
+      - intross-db-data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_DB=intross
+      - POSTGRES_PASSWORD=29c550b6db624fdaa622eab5b09ae729
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@heippi.com
+      - PGADMIN_DEFAULT_PASSWORD=TecPass
+
+volumes:
+  intross-db-data:

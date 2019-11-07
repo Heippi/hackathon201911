@@ -1,0 +1,72 @@
+<div class="fuse-navy w-100-p" fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-toolbar fxFlex="84px" *ngIf="ux.showTopToolbar">
+    <mat-toolbar-row>
+      <!-- <button class="h-84" mat-button (click)="ux.showTopToolbar = false;">
+            Show
+          </button> -->
+      <button class="h-84" mat-button>
+        Columns
+        <mat-slider
+          [max]="5"
+          [min]="1"
+          [step]="1"
+          [thumbLabel]="true"
+          [(ngModel)]="gridCols"
+        >
+        </mat-slider>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div
+    class="fuse-navy"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+    fxFlex
+    fusePerfectScrollbar
+  >
+    <!-- BOARD LIST -->
+
+    <!-- <canvas id="myvideo"></canvas> -->
+
+    <div class="w-100-p">
+      <mat-grid-list [cols]="gridCols">
+        <!-- BOARD -->
+        <mat-grid-tile *ngFor="let board of ux.videos; let idx = index">
+          <div
+            class="board-list-item"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            [ngClass]="board.active ? 'active' : 'inactive'"
+            (click)="goToStreamAnalysis(board)"
+            [@animate]="{ value: '*', params: { y: '100%' } }"
+          >
+            <div class="videoCanvas" [id]="'video_frame_' + board.id"></div>
+            <mat-icon *ngIf="!board.active" class="s-56">assessment</mat-icon>
+            <div *ngIf="!board.active" class="board-name">
+              Video Source {{ idx + 1 }}
+            </div>
+          </div>
+        </mat-grid-tile>
+
+        <!-- NEW BOARD BUTTON -->
+        <mat-grid-tile>
+          <div
+            class="board-list-item add-new-board"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            (click)="addNewVideoSource()"
+            [@animate]="{ value: '*', params: { y: '100%' } }"
+          >
+            <mat-icon class="s-56">add_circle</mat-icon>
+            <div class="board-name">Add new Video Source</div>
+          </div>
+        </mat-grid-tile>
+        <!-- / NEW BOARD BUTTON -->
+        <!-- / BOARD -->
+      </mat-grid-list>
+    </div>
+    <!-- / BOARD LIST -->
+  </div>
+</div>
+<!-- / BOARDS -->

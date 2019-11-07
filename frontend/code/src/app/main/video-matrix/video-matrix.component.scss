@@ -1,0 +1,57 @@
+@import "src/@fuse/scss/fuse";
+
+.board-list-item {
+  // min-width: 300px;
+  min-height: 60%;
+  height:60%;
+  width: 90%;
+  position: relative;
+  padding: 24px 0;
+  margin: 16px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.12);
+  transition: box-shadow 150ms ease-in;
+  cursor: pointer;
+  &.active {
+    background: #000 !important;
+  }
+
+  // .videoCanvas {
+  //   position: absolute;
+  //   height: 100%;
+  //   width: 100%;
+  //   flex-grow: 1;
+  // }
+
+  .videoCanvas {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+
+    canvas {
+      height: auto !important;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+  }
+
+  &:hover:not(.add-new-board) {
+    @include mat-elevation(8);
+  }
+
+  .board-name {
+    padding: 16px 32px 0 32px;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  &.add-new-board {
+    background: rgba(0, 0, 0, 0.06);
+    border: 2px dashed rgba(255, 255, 255, 0.37);
+  }
+}

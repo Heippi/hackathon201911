@@ -1,0 +1,20 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+
+// Import app.theme.scss
+@import "app/app.theme";
+
+.fullscreen {
+  .fullscreen-btn {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    z-index: 2;
+    border-color: #e91e634d !important;
+  }
+}
+.fullscreen.activated {
+  .fullscreen-btn {
+    opacity: 1;
+  }
+}
